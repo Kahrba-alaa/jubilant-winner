@@ -1,0 +1,30 @@
+workflows:
+  my-workflow:
+    name: Building App
+    istance_type: mac_mini
+    max_build_duration_ 60
+    enviroment:
+      vars:
+        PUBLIC_ENV_VAR: "value here"
+      flutter: 1.0.0+1
+      xcode: 13.2.1
+    cache:
+    triggering:
+      events:
+      branch_ptterns:
+        - pattern: master
+          include: true
+          source: true
+
+    scripts:
+      - flutter build apk  --no-tree-shake-icons
+    artifacts:
+      - build/**/outputs/**/*.aab
+      - build/app/outputs/flutter-apk/app-release.apk
+    
+    publishing:
+      email:
+        recipients:
+          - ahmed2g2@gmail.com
+
+release-workflow:
